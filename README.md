@@ -6,7 +6,7 @@
 
 *Replicated chunks made out of robust zinc-stained steel in an ordered log.*
 
-For messaging, we need to store and pass things around between people. Swarm is a place to store and spread thing. PSS is a way to do messaging on top of Swarm. Sometimes people are away, and when they come back they need a way to find out what they missed. Feeds is a place we can look to find thing that have changed. Staples is a proof of concept for messaging using Swarm, PSS and Feeds.
+For messaging, we need to store and pass things around between people. Swarm is a place to store and spread things. PSS is a way to do messaging on top of Swarm. Sometimes people are away, and when they come back they need a way to find out what they missed. Feeds is a place we can look to find thing that have changed. Staples is a proof of concept for messaging using Swarm, PSS and Feeds.
 
 ## What it looks like
 
@@ -31,7 +31,7 @@ You can see a demo of it [here](https://www.youtube.com/watch?v=HwiR0_KCQuI).
 
 ## Rationale
 
-**Context**: Status currently uses Whisper as a messaging protocol. For offline inboxing, and it uses Whisper mailservers in a cluster for offline inboxing. To get the latest messages, it currently assumes a given mailserver has received all latest messages and queries it upon startup. To do message ordering, it uses Lamport timestamps with real-time clock for hints., but largely relies on Whisper mailservers being highly available to provide this consistency.
+**Context**: Status currently uses Whisper as a messaging protocol. It uses Whisper mailservers in a cluster for offline inboxing. To get the latest messages, it currently assumes a given mailserver has received all latest messages and queries it upon startup. To do message ordering, it uses Lamport timestamps with real-time clock for hints, but largely relies on Whisper mailservers being highly available to provide this consistency.
 
 1. **PSS** is in some ways the spiritual successor to Whisper, and it has a very similar API. It provides better scalability due to its superior routing strategy, while maintaining the ability to be privacy-preserving. The proof of work used in Whisper is also a poor fit for heterogenerous devices. While Swap incentives, the DoS protection mechanism in PSS, isn't implemented yet, it is arguably a more sound design. Whisper is also not actively developed, and several developers have moved on to working on Swarm/PSS. For a more detailed comparison, see [here](https://our.status.im/whisper-pss-comparison/).
 
@@ -84,6 +84,11 @@ Things that can be improved:
    - => For protocol, write proposal to specs repo on what upgrade would look like
    - => Consider parallel support via feature flag for gradual move
    - => More research/thinking on properties and trade-offs
+- No encryption integrated.
+   - Using basic pubsub
+   - => Look more into ACT for e.g. public chats
+   - => Try DH handshake encryption modules.
+   - => Integrate existing DH etc protocol for Status.
 - Probably more.
 
 ## Takeaways
